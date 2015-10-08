@@ -1,0 +1,79 @@
+.notice{
+	padding-top: 1px;
+	padding-bottom: 6px;
+}
+.tShout{
+	margin-bottom: 10px;
+}
+.theadShout{
+	text-align: center;
+}
+.contentShout{
+	margin: 5px;
+}
+.contentShout > .tabShout{
+	background: #EAEAEA;
+	padding: 5px 10px;
+	border: 1px solid #CCCCCC;
+	border-bottom: 0px;
+	color: #555;
+	display: inline-block;
+	cursor: pointer;
+}
+.contentShout > .tabShout.selected{
+	background: transparent;
+	border-bottom: 1px solid #FBFBFB;
+	margin-bottom: -1px;
+	cursor: auto;
+}
+.wrapShout{
+	padding:5px;
+	background: #FBFBFB;
+	border:1px solid #CCCCCC;
+	overflow:auto;
+}
+.msgShout {
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+	color: rgb(96, 96, 96);
+	font-size: 12px;
+	font-family: sans-serif,Tahoma,Verdana,Arial;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	word-break: break-all;
+}
+.msgShout > .time_msgShout{
+	margin-right: 4px;
+}
+.msgShout > .pm_inf{
+	color: #3e3e3e;
+}
+.msgShout > .content_msgShout{
+	margin-left: 3px;
+	word-break: break-all;
+}
+.rsb_tvatar img {
+	border: 1px solid #D5D5D5;
+	max-width: 20px;
+	max-height: 20px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+	vertical-align: middle;
+	padding: 1px;
+	margin-right: 3px;
+}
+.rsb_tvatar img:hover {
+	border-color: #7D7D7D;
+}
+.msgShout:last-of-type {
+	border-bottom-style: none;
+	margin-bottom: 0px !important;
+}
+#font_color {
+	height: 16px;
+	border: medium none;
+	margin-top: 7px;
+	width: 30px;
+}
+#banusr div, #notice div, #prune div, #log div, #sound div, #login div, #rsb_connect div, #logoff div, #ignusr div {
+	height: 16px;
+	width: 16px;
+}
