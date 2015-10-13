@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RSB_PLUGIN_VER', '0.3.0');
+define('RSB_PLUGIN_VER', '0.3.1');
 
 function rinshoutbox_info()
 {
@@ -867,7 +867,7 @@ function sendPostDataRSB($linklang) {
 	$data = array(
 		"nick" => $name,
 		"msg" => $linklang,
-		"uid" => $uid,
+		"uid" => ''.$uid.'',
 		"colorsht" => $mybb->settings['rinshoutbox_newpt_color'],
 		"bold" => "NaN",
 		"font" => "NaN",
@@ -892,7 +892,7 @@ function sendPostDataRSB($linklang) {
 function token_gen() {
 
 	global $mybb, $settings;
-	include_once "rsb/FirebaseToken.php";
+	include_once "rin/FirebaseToken.php";
 
 	if($mybb->user['uid']==0) {
 		$name = 'guest';
@@ -917,7 +917,7 @@ function token_gen() {
 	$data = array(
 		"user" => $name,
 		"mybbusername" => $msbusrname,
-		"uid" => $uid,
+		"uid" => ''.$uid.'',
 		"gid" => $gid,
 		"rsbmodgroups" => $mybb->settings['rinshoutbox_mod_grups'],
 		"mod" => $msbmod,
