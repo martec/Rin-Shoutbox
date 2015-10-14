@@ -306,7 +306,7 @@ function rsb_connect_token(token, url) {
 			setTimeout(function() {
 				$('#inv_alert').jGrowl(invtoklang, { life: 1500 });
 			},200);
-			mfsb_connecticon();
+			rsb_connecticon();
 		}
 		else {
 			if ($("#auto_log").length) { $("#auto_log .jGrowl-notification:last-child").remove(); }
@@ -320,7 +320,6 @@ function rsb_connect_token(token, url) {
 function rsbshout(authData) {
 	var notban = '1',
 	uidlist = sb_ign_lst = '',
-	fontype = fontsize = fontbold = colorshout = 'NaN',
 	numshouts = authData.numshouts,
 	mentsound = 0;
 
@@ -334,8 +333,10 @@ function rsbshout(authData) {
 	if (parseInt(actcolor)) {
 		sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
 		if (sb_sty) {
-			if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(sb_sty['color'])) {
-				colorshout = sb_sty['color'];
+			if (sb_sty['color']) {
+				if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(sb_sty['color'])) {
+					colorshout = sb_sty['color'];
+				}
 			}
 		}
 	}
@@ -343,27 +344,39 @@ function rsbshout(authData) {
 	if (!parseInt(destyl)) {
 		sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
 		if (sb_sty) {
-			fontype = sb_sty['font'];
-			fontsize = sb_sty['size'];
+			if (sb_sty['font']) {
+				fontype = sb_sty['font'];
+			}
+			if (sb_sty['size']) {
+				fontsize = sb_sty['size'];
+			}
 		}
 	}
 
 	if (parseInt(actbold)) {
 		sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
 		if (sb_sty) {
-			fontbold = sb_sty['bold'];
+			if (sb_sty['bold']) {
+				fontbold = sb_sty['bold'];
+			}
 		}
 	}
 
 	sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
 	if (sb_sty) {
-		shoutvol = sb_sty['sound'];
-		mentsound = sb_sty['mentsound'];
+		if (sb_sty['sound']) {
+			shoutvol = sb_sty['sound'];
+		}
+		if (sb_sty['mentsound']) {
+			mentsound = sb_sty['mentsound'];
+		}
 	}
 
 	sb_ign = JSON.parse(localStorage.getItem('sb_ign_lst'));
 	if (sb_ign) {
-		sb_ign_lst = sb_ign['list'];
+		if (sb_ign['list']) {
+			sb_ign_lst = sb_ign['list'];
+		}
 	}
 
 	var amOnline = new Firebase(""+authData.url+"/.info/connected"),
@@ -588,7 +601,7 @@ function rsbshout(authData) {
 		}
 		if (regexment(message,authData.mybbusername)) {
 			if(parseFloat(shoutvol) && parseInt(mentsound) && ckold=="new") {
-				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/msb_sound.mp3');
+				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/rsb_sound.mp3');
 				sound.volume = parseFloat(shoutvol);
 				sound.play();
 			}
@@ -618,7 +631,7 @@ function rsbshout(authData) {
 		key = snapshot.key();
 		if (key!=id) {
 			if(parseFloat(shoutvol) && !parseInt(mentsound)) {
-				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/msb_sound.mp3');
+				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/rsb_sound.mp3');
 				sound.volume = parseFloat(shoutvol);
 				sound.play();
 			}
@@ -680,7 +693,7 @@ function rsbshout(authData) {
 		}
 		if (menttest) {
 			if(parseInt(mentsound)) {
-				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/msb_sound.mp3');
+				var sound = new Audio(rootpath + '/jscripts/rin/shoutbox/rsb_sound.mp3');
 				sound.volume = parseFloat(shoutvol);
 				sound.play();
 			}
@@ -1153,10 +1166,6 @@ function rsbshout(authData) {
 
 	($.fn.on || $.fn.live).call($(document), 'click', '#logoff_yes', function (e) {
 		e.preventDefault();
-		msb_token = JSON.parse(localStorage.getItem('msb_token'));
-		if (msb_token) {
-			localStorage.removeItem('msb_token');
-		}
 		sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
 		if (!sb_sty) {
 			sb_sty = {};

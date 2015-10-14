@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RSB_PLUGIN_VER', '0.3.1');
+define('RSB_PLUGIN_VER', '0.3.2');
 
 function rinshoutbox_info()
 {
@@ -436,6 +436,7 @@ function rinshoutbox_activate()
 	rinshoutbox_smilies = {
 		{\$smilies_json}
 	},
+	fontype = fontsize = fontbold = colorshout = 'NaN',
 	shoutvol = '{\$mybb->settings['rinshoutbox_def_vol']}',
 	iclid = '{\$mybb->settings['rinshoutbox_imgurapi']}',
 	maxnamelength = '{\$mybb->settings['maxnamelength']}',
