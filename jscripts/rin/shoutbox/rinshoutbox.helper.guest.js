@@ -36,6 +36,13 @@ function revescapeHtml(text) {
   return text.replace(/(&amp;|&lt;|&gt;|&quot;|&#039;)/g, function(m) { return map[m]; });
 }
 
+function badwordreplace(msg,badwl) {
+	for (var val in badwl) {
+		msg = msg.replace(new RegExp('\\b'+val+'\\b', "gi"), badwl[val]);
+	}
+	return msg;
+}
+
 function regexrin(message) {
 	format_search =	 [
 		/\[url=(.*?)\](.*?)\[\/url\]/ig,
@@ -60,6 +67,7 @@ function regexrin(message) {
 	for (var val in rinshoutbox_smilies) {
 		message = message.replace(new RegExp(''+val+'(?!\\S)', "gi"), rinshoutbox_smilies[val]);
 	}
+	message = badwordreplace(message);
 	return message;
 }
 
@@ -110,8 +118,8 @@ function autocleaner(area,count,numshouts,direction) {
 	},200);
 }
 
-function shoutgenerator(reqtype,key,colorsht,font,size,bold,avatar,hour,username,message,type,ckold,direction,numshouts,cur) {
-	var preapp = area = scrollarea = count = usravatar = shoutstyle = '';
+function shoutgenerator(reqtype,key,colorsht,font,size,bold,avatar,hour,username,message,type,ckold,direction,numshouts,cur,edtusr) {
+	var preapp = area = scrollarea = count = usravatar = shoutstyle = edtspan = '';
 	if(direction=='top'){
 		preapp = 'prepend';
 		if (reqtype == 'logback') {
@@ -166,11 +174,14 @@ function shoutgenerator(reqtype,key,colorsht,font,size,bold,avatar,hour,username
 			}
 		}
 	}
+	if (parseInt(edtusr)!=0) {
+		edtspan = "<span class='edt_class'> ["+edt_bylan+" "+edtusr+"]</span>";
+	}
 	if(type == 'shout') {
-		$(""+area+"")[preapp]("<div class='msgShout "+count+" "+escapeHtml(key)+"' data-ided="+escapeHtml(key)+">"+usravatar+"<span class='time_msgShout'><span>[</span>"+hour+"<span>]</span></span><span class='username_msgShout'>"+username+"</span>:<span class='content_msgShout' style='"+shoutstyle+"'>"+message+"</span></div>");
+		$(""+area+"")[preapp]("<div class='msgShout "+count+" "+escapeHtml(key)+"' data-ided="+escapeHtml(key)+">"+usravatar+"<span class='time_msgShout'><span>[</span>"+hour+"<span>]</span></span><span class='username_msgShout'>"+username+"</span>:<span class='content_msgShout' style='"+shoutstyle+"'>"+message+"</span>"+edtspan+"</div>");
 	}
 	if(type == 'system') {
-		$(""+area+"")[preapp]("<div class='msgShout "+count+" "+escapeHtml(key)+"' data-ided="+escapeHtml(key)+">"+usravatar+"*<span class='username_msgShout'>"+username+"</span><span class='content_msgShout' style='"+shoutstyle+"'>"+message+"</span>*</div>");
+		$(""+area+"")[preapp]("<div class='msgShout "+count+" "+escapeHtml(key)+"' data-ided="+escapeHtml(key)+">"+usravatar+"*<span class='username_msgShout'>"+username+"</span><span class='content_msgShout' style='"+shoutstyle+"'>"+message+"</span>"+edtspan+"*</div>");
 	}
 	if(cur==0) {
 		if(parseInt(actaimg)) {
@@ -201,7 +212,7 @@ function rinshoutbox_connect() {
 			IS_JSON = false;
 		}
 		if (IS_JSON) {
-			rsb_connect_token(JSON.parse(result).token, JSON.parse(result).url);
+			rsb_connect_token(JSON.parse(result).token, JSON.parse(result).data);
 		}
 		else {
 			if(typeof result == 'object')
@@ -228,10 +239,75 @@ function rinshoutbox_connect() {
 	});
 };
 
-function rsb_connect_token(token, url) {
-	var ref = new Firebase(url);
-	ref.authWithCustomToken(token, function(error, authData) {
-		if (error) {
+function rsb_connect_token(token, data) {
+	sb_sty = JSON.parse(localStorage.getItem('sb_col_ft'));
+	if (!sb_sty) {
+		sb_sty = {};
+	}
+	if (sb_sty['badword'] === undefined || parseInt(sb_sty['badword_ver'])!=parseInt(data.badwordver)) {
+		$.ajax({
+			type: 'POST',
+			url: 'xmlhttp.php?action=rinshoutbox_getbadword&my_post_key='+my_post_key
+		}).done(function (result) {
+			var IS_JSON = true;
+			try {
+				var json = $.parseJSON(result);
+			}
+			catch(err) {
+				IS_JSON = false;
+			}
+			if (IS_JSON) {
+				badwl = {};
+				for (var val in JSON.parse(result).badwrdcache) {
+					badwl[JSON.parse(result).badwrdcache[val].badword] = JSON.parse(result).badwrdcache[val].replacement;
+				}
+				sb_sty['badword'] = JSON.stringify(badwl);
+				sb_sty['badword_ver'] = data.badwordver;
+				localStorage.setItem('sb_col_ft', JSON.stringify(sb_sty));
+			}
+			else {
+				if(typeof result == 'object')
+				{
+					if(result.hasOwnProperty("errors"))
+					{
+						$.each(result.errors, function(i, message)
+						{
+							if(!$('#er_others').length) {
+								$('<div/>', { id: 'er_others', class: 'top-right' }).appendTo('body');
+							}
+							setTimeout(function() {
+								$('#er_others').jGrowl(message, { life: 1500 });
+							},200);
+						});
+					}
+				}
+				else {
+					return result;
+				}
+			}
+		});		
+	}
+
+	var config = {
+		apiKey: data.apikey,
+		authDomain: data.authdomain,
+		databaseURL: data.databaseurl
+	};
+	firebase.initializeApp(config);
+
+	var called = false;
+
+	firebase.auth().onAuthStateChanged(function(user) {
+		// Once authenticated, instantiate Firechat with the logged in user
+		if (user && !called) {
+			if ($("#auto_log").length) { $("#auto_log .jGrowl-notification:last-child").remove(); }
+			rsbshout(user, data);
+			called = true;
+		}
+	});
+
+	firebase.auth().signInWithCustomToken(token).catch(function(error) {
+		if (!called) {
 			if ($("#auto_log").length) { $("#auto_log .jGrowl-notification:last-child").remove(); }
 			if(!$('#inv_alert').length) {
 				$('<div/>', { id: 'inv_alert', class: 'top-right' }).appendTo('body');
@@ -240,18 +316,14 @@ function rsb_connect_token(token, url) {
 				$('#inv_alert').jGrowl(invtoklang, { life: 1500 });
 			},200);
 		}
-		else {
-			if ($("#auto_log").length) { $("#auto_log .jGrowl-notification:last-child").remove(); }
-			rsbshout(authData.auth);
-		}
 	});
 }
 
-function rsbshout(authData) {
+function rsbshout(authuser, authData) {
 
-	var numshouts = authData.numshouts,
-	noticefb = new Firebase(""+authData.url+"/notice"),
-	messagesRef = new Firebase(""+authData.url+"/shout");
+	var numshouts = authData.numshouts;
+	noticefb = firebase.database().ref("notice"),
+	messagesRef = firebase.database().ref("shout");
 
 	noticefb.once('value', function(snapshot) {
 		if (snapshot.val()) {
@@ -281,23 +353,23 @@ function rsbshout(authData) {
 		numshouts = '100';
 	}
 
-	function displayMsg(reqtype, message, username, colorsht, font, size, bold, avatar, edt, type, key, created, ckold, cur){
+	function displayMsg(reqtype, message, username, colorsht, font, size, bold, avatar, edt, edtusr, type, key, created, ckold, cur){
 		var hour = moment(created).utcOffset(parseInt(zoneset)).format(zoneformt);
 		message = regexrin(escapeHtml(revescapeHtml(message))),
 		nums = numshouts;
-		shoutgenerator(reqtype,key,colorsht,font,size,bold,avatar,hour,username,message,type,ckold,direction,nums,cur);
+		shoutgenerator(reqtype,key,colorsht,font,size,bold,avatar,hour,username,message,type,ckold,direction,nums,cur,edtusr);
 	};
 
-	function checkMsg(req, msg, nick, colorsht, font, size, bold, avatar, edt, type, _id, created, ckold, cur) {
+	function checkMsg(req, msg, nick, colorsht, font, size, bold, avatar, edt, edtusr, type, _id, created, ckold, cur) {
 		var mtype = 'shout';
-		displayMsg(mtype, msg, nick, colorsht, font, size, bold, avatar, edt, type, _id, created, ckold, cur);
+		displayMsg(mtype, msg, nick, colorsht, font, size, bold, avatar, edt, edtusr, type, _id, created, ckold, cur);
 	};
 
 	function newmsg (snapshot,id) {
 		docs = snapshot.val();
-		key = snapshot.key();
+		key = snapshot.key;
 		if (key!=id) {
-			checkMsg("msg", docs.msg, docs.nick, docs.colorsht, docs.font, docs.size, docs.bold, docs.avatar, docs.edt, docs.type, snapshot.key(), docs.created, 'new', 0);
+			checkMsg("msg", docs.msg, docs.nick, docs.colorsht, docs.font, docs.size, docs.bold, docs.avatar, docs.edt, docs.edtusr, docs.type, snapshot.key, docs.created, 'new', 0);
 		}
 	}
 
@@ -309,7 +381,7 @@ function rsbshout(authData) {
 			});
 			docs = predocs.reverse();
 			for (var i = docs.length-1; i >= 0; i--) {
-				checkMsg("msg", docs[i].msg, docs[i].nick, docs[i].colorsht, docs[i].font, docs[i].size, docs[i].bold, docs[i].avatar, docs[i].edt, docs[i].type, docs[i]._id, docs[i].created, 'old', i);
+				checkMsg("msg", docs[i].msg, docs[i].nick, docs[i].colorsht, docs[i].font, docs[i].size, docs[i].bold, docs[i].avatar, docs[i].edt, docs[i].edtusr, docs[i].type, docs[i]._id, docs[i].created, 'old', i);
 			}
 			var start = docs[0]._id;
 			messagesRef.orderByKey().startAt(start).on("child_added", function(snapshot) {

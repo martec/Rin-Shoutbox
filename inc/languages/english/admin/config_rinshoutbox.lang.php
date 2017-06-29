@@ -3,7 +3,7 @@
  * Rin Shoutbox
  * https://github.com/martec
  *
- * Copyright (C) 2015-2015, Martec
+ * Copyright (C) 2015-2016, Martec
  *
  * Rin Shoutbox is licensed under the GPL Version 3, 29 June 2007 license:
  *	http://www.gnu.org/copyleft/gpl.html
@@ -27,12 +27,22 @@ $l['rinshoutbox_nogrp_title'] = 'Group without permission to use';
 $l['rinshoutbox_nogrp_desc'] = 'Set here group that does not has permission to use Rin Shoutbox.';
 $l['rinshoutbox_mod_title'] = 'Mod Group';
 $l['rinshoutbox_mod_desc'] = 'Set here group with moderation privilege.';
+$l['rinshoutbox_edt_title'] = 'Edit/Delete privilege Group';
+$l['rinshoutbox_edt_desc'] = 'Set here group that can edit and delete own shout.';
 $l['rinshoutbox_guest_title'] = 'Read mode to guest';
 $l['rinshoutbox_guest_desc'] = 'Guest not has access to this shout. But you can enable read only mode to guest here.';
 $l['rinshoutbox_shout_title'] = 'Title of Rin Shoutbox';
 $l['rinshoutbox_shout_desc'] = 'Set here title of shoutbox that will appear.';
-$l['rinshoutbox_server_title'] = 'Your Firebase link';
-$l['rinshoutbox_server_desc'] = 'Set here Firebase address. Ps. Not put last slash at end of address.';
+$l['rinshoutbox_apikey_title'] = 'Your Firebase API Key';
+$l['rinshoutbox_apikey_desc'] = 'Set here Firebase API Key.';
+$l['rinshoutbox_authdomain_title'] = 'Your Firebase Authentication Domain';
+$l['rinshoutbox_authdomain_desc'] = 'Set here Firebase Authentication Domain.';
+$l['rinshoutbox_databaseurl_title'] = 'Your Firebase Database URL';
+$l['rinshoutbox_databaseurl_desc'] = 'Set here Firebase Database URL.';
+$l['rinshoutbox_clientemail_title'] = 'Your Firebase Client Email';
+$l['rinshoutbox_clientemail_desc'] = 'Set here Firebase Client Email.';
+$l['rinshoutbox_privatekey_title'] = 'Your Firebase Private Key';
+$l['rinshoutbox_privatekey_desc'] = 'Set here Firebase Private Key.';
 $l['rinshoutbox_fsecret_title'] = 'Your Firebase Secret';
 $l['rinshoutbox_fsecret_desc'] = 'Set here Firebase Secret.';
 $l['rinshoutbox_imgur_title'] = 'Imgur';
@@ -51,8 +61,6 @@ $l['rinshoutbox_newptcolor_title'] = 'Color for new thread and new post shout';
 $l['rinshoutbox_newptcolor_desc'] = 'Set here color for new thread and new post shout.';
 $l['rinshoutbox_oncolor_title'] = 'Online border color';
 $l['rinshoutbox_oncolor_desc'] = 'Set border color to online users.';
-$l['rinshoutbox_mention_title'] = 'Mention Autocomplete';
-$l['rinshoutbox_mention_desc'] = 'Set to no if you do not want enable mention autocomplete feature.<br /><strong>Ps:</strong> This may perhaps increase the use of resources.';
 $l['rinshoutbox_mentstyle_title'] = 'Mention border style';
 $l['rinshoutbox_mentstyle_desc'] = 'Set border style to mention.';
 $l['rinshoutbox_edtcolor_title'] = 'Background color to edited shout';
@@ -92,6 +100,6 @@ $l['rinshoutbox_destindx_title'] = 'Hide Rin Shoutbox in Index page?';
 $l['rinshoutbox_destindx_desc'] = 'Set here if you want hide shoutbox in index or not.';
 $l['rinshoutbox_actport_title'] = 'Show Rin Shoutbox in Portal page?';
 $l['rinshoutbox_actport_desc'] = 'Set here if you want show shoutbox in portal or not.';
-$l['rinshoutbox_newpost_lang'] = 'posted in thread {1}';
+$l['rinshoutbox_newpost_lang'] = 'posted in thread {1}. There may be more posts after this.';
 $l['rinshoutbox_newthread_lang'] = 'posted new thread {1}';
 ?>

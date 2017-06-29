@@ -84,7 +84,9 @@ $(document).ready(function() {
 		}
 		$(simpbutgen('spoiler','s','spoiler',1,'',qse_area,spo_lan)).appendTo('.yuieditor-group_'+qse_area+':last');
 		$(emotbutgen(qse_area)).appendTo('.yuieditor-group_'+qse_area+':last');
-		$(imgurbutgen(qse_area)).appendTo('.yuieditor-group_'+qse_area+':last');
+		if (iclid) {
+			$(imgurbutgen(qse_area)).appendTo('.yuieditor-group_'+qse_area+':last');
+		}
 	}
 });
 

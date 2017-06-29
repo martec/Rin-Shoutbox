@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RSB_PLUGIN_VER', '0.3.3');
+define('RSB_PLUGIN_VER', '0.4.0');
 
 function rinshoutbox_info()
 {
@@ -110,12 +110,21 @@ function rinshoutbox_install()
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
+		'name' => 'rinshoutbox_edt_grups',
+		'title' => $lang->rinshoutbox_edt_title,
+		'description' => $lang->rinshoutbox_edt_desc,
+		'optionscode' => 'groupselect',
+		'value' => '',
+		'disporder' => 7,
+		'gid'		=> $groupid
+	);	
+	$rinshoutbox_setting[] = array(
 		'name' => 'rinshoutbox_guest',
 		'title' => $lang->rinshoutbox_guest_title,
 		'description' => $lang->rinshoutbox_guest_desc,
 		'optionscode' => 'yesno',
 		'value' => '0',
-		'disporder' => 7,
+		'disporder' => 8,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -124,16 +133,52 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_shout_desc,
 		'optionscode' => 'text',
 		'value' => 'Rin Shoutbox',
-		'disporder' => 8,
+		'disporder' => 9,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
-		'name' => 'rinshoutbox_server',
-		'title' => $lang->rinshoutbox_server_title,
-		'description' => $lang->rinshoutbox_server_desc,
+		'name' => 'rinshoutbox_apiKey',
+		'title' => $lang->rinshoutbox_apikey_title,
+		'description' => $lang->rinshoutbox_apikey_desc,
 		'optionscode' => 'text',
 		'value' => '',
-		'disporder' => 9,
+		'disporder' => 10,
+		'gid'		=> $groupid
+	);
+	$rinshoutbox_setting[] = array(
+		'name' => 'rinshoutbox_authDomain',
+		'title' => $lang->rinshoutbox_authdomain_title,
+		'description' => $lang->rinshoutbox_authdomain_desc,
+		'optionscode' => 'text',
+		'value' => '',
+		'disporder' => 11,
+		'gid'		=> $groupid
+	);
+	$rinshoutbox_setting[] = array(
+		'name' => 'rinshoutbox_databaseURL',
+		'title' => $lang->rinshoutbox_databaseurl_title,
+		'description' => $lang->rinshoutbox_databaseurl_desc,
+		'optionscode' => 'text',
+		'value' => '',
+		'disporder' => 12,
+		'gid'		=> $groupid
+	);
+	$rinshoutbox_setting[] = array(
+		'name' => 'rinshoutbox_client_email',
+		'title' => $lang->rinshoutbox_clientemail_title,
+		'description' => $lang->rinshoutbox_clientemail_desc,
+		'optionscode' => 'text',
+		'value' => '',
+		'disporder' => 13,
+		'gid'		=> $groupid
+	);
+	$rinshoutbox_setting[] = array(
+		'name' => 'rinshoutbox_private_key',
+		'title' => $lang->rinshoutbox_privatekey_title,
+		'description' => $lang->rinshoutbox_privatekey_desc,
+		'optionscode' => 'textarea',
+		'value' => '',
+		'disporder' => 14,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -142,7 +187,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_fsecret_desc,
 		'optionscode' => 'text',
 		'value' => '',
-		'disporder' => 10,
+		'disporder' => 15,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -151,7 +196,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_imgur_desc,
 		'optionscode' => 'text',
 		'value' => '',
-		'disporder' => 11,
+		'disporder' => 16,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -160,7 +205,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_dataf_desc,
 		'optionscode' => 'text',
 		'value' => 'DD/MM hh:mm A',
-		'disporder' => 12,
+		'disporder' => 17,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -169,7 +214,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_antiflood_desc,
 		'optionscode' => 'numeric',
 		'value' => '0',
-		'disporder' => 13,
+		'disporder' => 18,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -178,7 +223,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_newpost_desc,
 		'optionscode' => 'yesno',
 		'value' => 1,
-		'disporder' => 14,
+		'disporder' => 19,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -187,7 +232,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_newthread_desc,
 		'optionscode' => 'yesno',
 		'value' => 1,
-		'disporder' => 15,
+		'disporder' => 20,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -196,7 +241,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_foldacc_desc,
 		'optionscode' => 'forumselect',
 		'value' => '',
-		'disporder' => 16,
+		'disporder' => 21,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -205,7 +250,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_newptcolor_desc,
 		'optionscode' => 'text',
 		'value' => '#727272',
-		'disporder' => 17,
+		'disporder' => 22,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -214,16 +259,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_oncolor_desc,
 		'optionscode' => 'text',
 		'value' => 'green',
-		'disporder' => 18,
-		'gid'		=> $groupid
-	);
-	$rinshoutbox_setting[] = array(
-		'name'		=> 'rinshoutbox_mention',
-		'title'		=> $lang->rinshoutbox_mention_title,
-		'description'	=> $lang->rinshoutbox_mention_desc,
-		'optionscode'	=> 'onoff',
-		'value'		=> '1',
-		'disporder'	=> 19,
+		'disporder' => 23,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -232,7 +268,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_mentstyle_desc,
 		'optionscode' => 'text',
 		'value' => '5px solid #cd0e0a',
-		'disporder' => 20,
+		'disporder' => 24,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -241,7 +277,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_edtcolor_desc,
 		'optionscode' => 'text',
 		'value' => '#f5caca',
-		'disporder' => 21,
+		'disporder' => 25,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -250,7 +286,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_zone_desc,
 		'optionscode' => 'text',
 		'value' => '-3',
-		'disporder' => 22,
+		'disporder' => 26,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -260,7 +296,7 @@ function rinshoutbox_install()
 		'optionscode' => 'radio
 '.$lang->rinshoutbox_shoutstart_opt.'',
 		'value' => 'bottom',
-		'disporder' => 23,
+		'disporder' => 27,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -269,7 +305,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_actaimg_desc,
 		'optionscode' => 'yesno',
 		'value' => 0,
-		'disporder' => 24,
+		'disporder' => 28,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -278,7 +314,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_aimgrepl_desc,
 		'optionscode' => 'textarea',
 		'value' => '',
-		'disporder' => 25,
+		'disporder' => 29,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -287,7 +323,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_limcharact_desc,
 		'optionscode' => 'numeric',
 		'value' => 0,
-		'disporder' => 26,
+		'disporder' => 30,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -296,7 +332,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_aavatar_desc,
 		'optionscode' => 'yesno',
 		'value' => 1,
-		'disporder' => 27,
+		'disporder' => 31,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -305,7 +341,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_acolor_desc,
 		'optionscode' => 'yesno',
 		'value' => 1,
-		'disporder' => 28,
+		'disporder' => 32,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -314,7 +350,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_acbold_desc,
 		'optionscode' => 'yesno',
 		'value' => 1,
-		'disporder' => 29,
+		'disporder' => 33,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -323,7 +359,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_stfont_desc,
 		'optionscode' => 'textarea',
 		'value' => 'Arial,Arial Black,Comic Sans MS,Courier New,Georgia,Impact,Sans-serif,Serif,Times New Roman,Trebuchet MS,Verdana',
-		'disporder' => 30,
+		'disporder' => 34,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -332,7 +368,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_sizfont_desc,
 		'optionscode' => 'textarea',
 		'value' => '11,12,13',
-		'disporder' => 31,
+		'disporder' => 35,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -341,7 +377,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_deststyl_desc,
 		'optionscode' => 'yesno',
 		'value' => 0,
-		'disporder' => 32,
+		'disporder' => 36,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -350,7 +386,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_dcln_desc,
 		'optionscode' => 'yesno',
 		'value' => 0,
-		'disporder' => 33,
+		'disporder' => 37,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -360,7 +396,7 @@ function rinshoutbox_install()
 		'optionscode' => 'radio
 '.$lang->rinshoutbox_dvol_opt.'',
 		'value' => '0',
-		'disporder' => 34,
+		'disporder' => 38,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -369,7 +405,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_destindx_desc,
 		'optionscode' => 'yesno',
 		'value' => 0,
-		'disporder' => 35,
+		'disporder' => 39,
 		'gid'		=> $groupid
 	);
 	$rinshoutbox_setting[] = array(
@@ -378,7 +414,7 @@ function rinshoutbox_install()
 		'description' => $lang->rinshoutbox_actport_desc,
 		'optionscode' => 'yesno',
 		'value' => 0,
-		'disporder' => 36,
+		'disporder' => 40,
 		'gid'		=> $groupid
 	);
 
@@ -418,7 +454,7 @@ function rinshoutbox_activate()
 	require MYBB_ROOT.'/inc/adminfunctions_templates.php';
 
 	$new_template_global['codebutrsb'] = "<link href=\"{\$mybb->asset_url}/jscripts/rin/shoutbox/style.css?ver=".RSB_PLUGIN_VER."\" rel='stylesheet' type='text/css'>
-<script src=\"https://cdn.firebase.com/js/client/2.2.9/firebase.js\"></script>
+<script src=\"https://www.gstatic.com/firebasejs/4.1.3/firebase.js\"></script>
 <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css\">
 <script type=\"text/javascript\" src=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js\"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
@@ -447,6 +483,7 @@ function rinshoutbox_activate()
 	spo_lan = '{\$lang->rinshoutbox_spoiler}',
 	show_lan = '{\$lang->rinshoutbox_show}',
 	hide_lan = '{\$lang->rinshoutbox_hide}',
+	edt_bylan = '{\$lang->rinshoutbox_edited_by}',
 	upimgurlang = '{\$lang->rinshoutbox_up_imgur}',
 	connectlang = '{\$lang->rinshoutbox_connect}',
 	logofflang = '{\$lang->rinshoutbox_logoff}',
@@ -482,11 +519,13 @@ function rinshoutbox_activate()
 	shout_savelan = '{\$lang->rinshoutbox_save}',
 	shout_delan = '{\$lang->rinshoutbox_del_msg}',
 	cancel_editlan = '{\$lang->rinshoutbox_cancel_edt}',
-	sound_lan = '{\$lang->rinshoutbox_sound_msg}',
+	settings_lan = '{\$lang->rinshoutbox_settings_msg}',
+	loadimg_lan = '{\$lang->rinshoutbox_load_img}',
 	volume_lan = '{\$lang->rinshoutbox_volume_msg}',
 	min_lan = '{\$lang->rinshoutbox_vmin_msg}',
 	max_lan = '{\$lang->rinshoutbox_vmax_msg}',
 	ment_sound = '{\$lang->rinshoutbox_mentsound_msg}',
+	perm_msglan = '{\$lang->rinshoutbox_user_permission}',
 	direction = '{\$mybb->settings['rinshoutbox_shouts_start']}',
 	zoneset = '{\$mybb->settings['rinshoutbox_zone']}',
 	zoneformt = '{\$mybb->settings['rinshoutbox_dataf']}',
@@ -510,7 +549,6 @@ function rinshoutbox_activate()
 </script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/shoutbox/yui.editor.js?ver=".RSB_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/shoutbox/yui.editor.helper.js?ver=".RSB_PLUGIN_VER."\"></script>
-{\$yui_mention}
 <script type=\"text/javascript\" src=\"{\$mybb->asset_url}/jscripts/rin/shoutbox/rinshoutbox.helper.js?ver=".RSB_PLUGIN_VER."\"></script>
 <script type=\"text/javascript\">
 \$(document).ready(function() {
@@ -566,8 +604,8 @@ function rinshoutbox_activate()
 	</tbody>
 </table>
 <link href=\"{\$mybb->asset_url}/jscripts/rin/shoutbox/style.css?ver=".RSB_PLUGIN_VER."\" rel='stylesheet' type='text/css'>
+<script src=\"https://www.gstatic.com/firebasejs/4.1.3/firebase.js\"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js'></script>
-<script src=\"https://cdn.firebase.com/js/client/2.2.9/firebase.js\"></script>
 <script type=\"text/javascript\">
 <!--
 	rsbfontsize = '{\$mybb->settings['rinshoutbox_styles_size']}',
@@ -575,6 +613,7 @@ function rinshoutbox_activate()
 	spo_lan = '{\$lang->rinshoutbox_spoiler}',
 	show_lan = '{\$lang->rinshoutbox_show}',
 	hide_lan = '{\$lang->rinshoutbox_hide}',
+	edt_bylan = '{\$lang->rinshoutbox_edited_by}',
 	aloadlang = '{\$lang->rinshoutbox_auto_load}',
 	direction = '{\$mybb->settings['rinshoutbox_shouts_start']}',
 	zoneset = '{\$mybb->settings['rinshoutbox_zone']}',
@@ -811,14 +850,6 @@ function rinshoutbox_bbcode_func($smilies = true)
 			}
 		}
 
-		if($mybb->settings['rinshoutbox_mention'] == 1)
-		{
-			$yui_mention = "<link rel=\"stylesheet\" href=\"".$mybb->asset_url."/jscripts/rin/shoutbox/jquery.atwho.min.css?ver=".RSB_PLUGIN_VER."\" type=\"text/css\" media=\"all\" />
-<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/shoutbox/jquery.caret.min.js?ver=".RSB_PLUGIN_VER."\"></script>
-<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/shoutbox/jquery.atwho.min.js?ver=".RSB_PLUGIN_VER."\"></script>
-<script type=\"text/javascript\" src=\"".$mybb->asset_url."/jscripts/rin/shoutbox/yui.mention.js?ver=".RSB_PLUGIN_VER."\"></script>";
-		}
-
 		eval("\$rinshoutboxbbcode = \"".$templates->get("codebutrsb")."\";");
 	}
 
@@ -876,10 +907,11 @@ function sendPostDataRSB($linklang) {
 		"avatar" => $avatar,
 		"created" => TIME_NOW,
 		"edt" => "0",
+		"edtusr" => "0",
 		"type" => "system"
 	);
 
-	$emiturl ="".$settings['rinshoutbox_server']."/shout.json?auth=".token_gen()."";
+	$emiturl = "".trim($mybb->settings['rinshoutbox_databaseURL'])."/shout.json?auth=".trim($mybb->settings['rinshoutbox_fsecret'])."";
 
 	$ch = curl_init($emiturl);
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -892,46 +924,49 @@ function sendPostDataRSB($linklang) {
 
 function token_gen() {
 
-	global $mybb, $settings;
-	include_once "rin/FirebaseToken.php";
+	global $mybb, $cache;
+	include_once "rin/JWT.php";
 
 	if($mybb->user['uid']==0) {
 		$name = 'guest';
-		$msbusrname = 'guest';
 		$avatar = '';
 		$gid = '';
-		$msbmod = '0';
-		$uid = '0';
+		$rsbmod = '0';
 	}
 	else {
 		$name = format_name($mybb->user['username'], $mybb->user['usergroup'], $mybb->user['displaygroup']);
-		$msbusrname = addslashes($mybb->user['username']);
 		$avatar = $mybb->user['avatar'];
 		$gid = $mybb->user['usergroup'];
-		$msbmod = '0';
-		$uid = $mybb->user['uid'];
+		$rsbmod = '0';
 		if(in_array((int)$mybb->user['usergroup'],explode(',',$mybb->settings['rinshoutbox_mod_grups']))) {
-			$msbmod = '1';
+			$rsbmod = '1';
+		}
+		if(in_array((int)$mybb->user['usergroup'],explode(',',$mybb->settings['rinshoutbox_edt_grups']))) {
+			$rsbedg = '1';
 		}
 	}
 
 	$data = array(
-		"user" => $name,
-		"mybbusername" => $msbusrname,
-		"uid" => ''.$uid.'',
-		"gid" => $gid,
-		"rsbmodgroups" => $mybb->settings['rinshoutbox_mod_grups'],
-		"mod" => $msbmod,
-		"avatar" => $avatar,
-		"lc" => (int)$mybb->settings['rinshoutbox_lim_character'],
-		"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1000,
-		"mpp" => $mybb->settings['rinshoutbox_lognum_shouts'],
-		"numshouts" => $mybb->settings['rinshoutbox_num_shouts'],
-		"url" => $mybb->settings['rinshoutbox_server']
+		"iss" => trim($mybb->settings['rinshoutbox_client_email']),
+		"sub" => trim($mybb->settings['rinshoutbox_client_email']),
+		"aud" => "https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit",
+		"iat" => time(),
+		"exp" => time()+(60*60),  // Maximum expiration time is one hour
+		"uid" => ''.$mybb->user['uid'].'',
+		"displayName" => $name,
+		"mod" => $rsbmod,
+		"claims" => array(
+			"user" => $name,
+			"username" => ''.$mybb->user['username'].'',
+			"mod" => $rsbmod,
+			"edt" => $rsbedg,
+			"avatar" => $avatar,
+			"lc" => (int)$mybb->settings['rinshoutbox_lim_character'],
+			"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1000
+		)
 	);
 
-	$tokenGen = new Services_FirebaseTokenGenerator($mybb->settings['rinshoutbox_fsecret']);
-	$token = $tokenGen->createToken($data);
+	$token = JWT::encode($data, str_replace('\n', "\n", trim($mybb->settings['rinshoutbox_private_key'])), "RS256");
 	return $token;
 }
 
@@ -940,12 +975,12 @@ if ($settings['rinshoutbox_online'] && $settings['rinshoutbox_newthread']) {
 }
 function RSB_newthread()
 {
-	global $mybb, $tid, $settings, $lang, $forum;
+	global $mybb, $tid, $lang, $forum;
 
 	if(!in_array((int)$forum['fid'],explode(',',$mybb->settings['rinshoutbox_folder_acc']))) {
 		$lang->load('admin/config_rinshoutbox');
 
-		$link = '[url=' . $settings['bburl'] . '/' . get_thread_link($tid) . ']' . $mybb->input['subject'] . '[/url]';
+		$link = '[url=' . $mybb->settings['bburl'] . '/' . get_thread_link($tid) . ']' . $mybb->input['subject'] . '[/url]';
 		$linklang = $lang->sprintf($lang->rinshoutbox_newthread_lang, $link);
 
 		sendPostDataRSB($linklang);
@@ -957,24 +992,66 @@ if ($settings['rinshoutbox_online'] && $settings['rinshoutbox_newpost']) {
 }
 function RSB_newpost()
 {
-	global $mybb, $tid, $settings, $lang, $url, $thread, $forum, $db;
+	global $mybb, $tid, $lang, $url, $thread, $forum, $db, $cache;
+	
+	$rsbcache = $cache->read('martec_plugins');
+	
+	$rsblastpostid = $rsblastpostuid = '';
+	
+	if (!empty($rsbcache) && isset($rsbcache['rsb'])) {
+		$rsblastpostcache = $rsbcache['rsb'];
+		$rsblastpostid = $rsblastpostcache['lasttid'];
+		$rsblastpostuid = $rsblastpostcache['lastuid'];
+	}
 
-	if(!in_array((int)$forum['fid'],explode(',',$mybb->settings['rinshoutbox_folder_acc']))) {
+	if(!in_array((int)$forum['fid'],explode(',',$mybb->settings['rinshoutbox_folder_acc'])) && !($rsblastpostid == $tid && $rsblastpostuid == $mybb->user['uid'])) {
 		$lang->load('admin/config_rinshoutbox');
 
 		$MSB_url = htmlspecialchars_decode($url);
-		$link = '[url=' . $settings['bburl'] . '/' . $MSB_url . ']' . $thread['subject'] . '[/url]';
+		$link = '[url=' . $mybb->settings['bburl'] . '/' . $MSB_url . ']' . $thread['subject'] . '[/url]';
 		$linklang = $lang->sprintf($lang->rinshoutbox_newpost_lang, $link);
+		
+		$rsblastpost['rsb'] = array(
+			"lasttid" => $tid,
+			"lastuid" => $mybb->user['uid']
+		);
+		
+		$cache->update("martec_plugins", $rsblastpost);
 
 		sendPostDataRSB($linklang);
 	}
+}
+
+if ($settings['rinshoutbox_online']) {
+	$plugins->add_hook('admin_config_badwords_add_commit', 'RSB_updatebadwordver');
+	$plugins->add_hook('admin_config_badwords_delete_commit', 'RSB_updatebadwordver');
+	$plugins->add_hook('admin_config_badwords_edit_commit', 'RSB_updatebadwordver');
+}
+function RSB_updatebadwordver()
+{
+	global $mybb, $cache;
+
+	$rsbcache = $cache->read('martec_plugins');
+	
+	$rsbbadwvcache = 0;
+	
+	if (!empty($rsbcache) && isset($rsbcache['rsb_bdw'])) {
+		$rsbbadwcache = $rsbcache['rsb_bdw'];
+		$rsbbadwvcache = $rsbbadwcache['version'];
+	}
+
+	$data['rsb_bdw'] = array(
+		"version" => ++$rsbbadwvcache
+	);
+	
+	$cache->update("martec_plugins", $data);	
 }
 
 $plugins->add_hook('xmlhttp', 'rinshoutbox_auth');
 
 function rinshoutbox_auth()
 {
-	global $mybb, $lang, $parser, $settings;
+	global $mybb, $lang, $parser, $cache;
 
 	if (!is_object($parser))
 	{
@@ -982,17 +1059,91 @@ function rinshoutbox_auth()
 		$parser = new postParser;
 	}
 
-	if ($mybb->input['action'] != "rinshoutbox_gettoken" || $mybb->request_method != "post"){return false;exit;}
+	if ($mybb->request_method != "post"){return false;exit;}
 
 	if (!verify_post_check($mybb->input['my_post_key'], true))
 	{
 		xmlhttp_error($lang->invalid_post_code);
 	}
+	
+	switch ($mybb->input['action']) {
 
-	if ($mybb->input['action'] == "rinshoutbox_gettoken"){
+		case 'rinshoutbox_gettoken':
+	
+			if($mybb->user['uid']==0) {
+				$name = 'guest';
+				$rsbusrname = 'guest';
+				$avatar = '';
+				$gid = '';
+				$rsbmod = $rsbedg = '0';
+			}
+			else {
+				$name = format_name($mybb->user['username'], $mybb->user['usergroup'], $mybb->user['displaygroup']);
+				$rsbusrname = addslashes($mybb->user['username']);
+				$avatar = $mybb->user['avatar'];
+				$gid = $mybb->user['usergroup'];
+				$rsbmod = $rsbedg = '0';
+				if(in_array((int)$mybb->user['usergroup'],explode(',',$mybb->settings['rinshoutbox_mod_grups']))) {
+					$rsbmod = '1';
+				}
+				if(in_array((int)$mybb->user['usergroup'],explode(',',$mybb->settings['rinshoutbox_edt_grups']))) {
+					$rsbedg = '1';
+				}
+			}
 
-		$arraytoken = array('token' => token_gen(), 'url' => $mybb->settings['rinshoutbox_server']);
-		echo json_encode($arraytoken);
+			$rsbcache = $cache->read('martec_plugins');
+
+			$rsbbadwvcache = 0;
+
+			if (!empty($rsbcache) && isset($rsbcache['rsb_bdw'])) {
+				$rsbbadwcache = $rsbcache['rsb_bdw'];
+				$rsbbadwvcache = $rsbbadwcache['version'];
+			}
+
+			$data = array(
+				"user" => $name,
+				"mybbusername" => $rsbusrname,
+				"username" => $mybb->user['username'],
+				"gid" => $gid,
+				"rsbmod" => $rsbmod,
+				"rsbedg" => $rsbedg,
+				"mod" => $rsbmod,
+				"avatar" => $avatar,
+				"lc" => (int)$mybb->settings['rinshoutbox_lim_character'],
+				"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1000,
+				"mpp" => $mybb->settings['rinshoutbox_lognum_shouts'],
+				"numshouts" => $mybb->settings['rinshoutbox_num_shouts'],
+				"apikey" => trim($mybb->settings['rinshoutbox_apiKey']),
+				"authdomain" => trim($mybb->settings['rinshoutbox_authDomain']),
+				"databaseurl" => trim($mybb->settings['rinshoutbox_databaseURL']),
+				"badwordver" => $rsbbadwvcache
+			);
+
+			$arraytoken = array('token' => token_gen(), 'data' => $data);
+			echo json_encode($arraytoken);
+
+			break;
+
+		case 'rinshoutbox_getbadword':
+
+			$badword_cache = $cache->read("badwords");
+			
+			foreach($badword_cache as $badword)
+			{
+				$badword['badword'] = preg_quote(htmlspecialchars_uni($badword['badword']));
+				if(!$badword['replacement'])
+				{
+					$badword['replacement'] = "*****";
+				}
+				$badword['replacement'] = htmlspecialchars_uni($badword['replacement']);
+				$badwordcache[$badword['bid']] = $badword;
+			}
+			
+			unset($badword);
+			
+			$badwordcache = array('badwrdcache' => $badwordcache);
+			echo json_encode($badwordcache);
+		break;
 	}
 }
 
