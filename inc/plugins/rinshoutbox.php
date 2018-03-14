@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RSB_PLUGIN_VER', '0.4.0');
+define('RSB_PLUGIN_VER', '0.4.1');
 
 function rinshoutbox_info()
 {
@@ -44,8 +44,8 @@ function rinshoutbox_install()
 
 	$lang->load('config_rinshoutbox');
 
-	$query	= $db->simple_select("settinggroups", "COUNT(*) as rows");
-	$dorder = $db->fetch_field($query, 'rows') + 1;
+	$query	= $db->simple_select("settinggroups", "COUNT(*) as counts");
+	$dorder = $db->fetch_field($query, 'counts') + 1;
 
 	$groupid = $db->insert_query('settinggroups', array(
 		'name'		=> 'rinshoutbox',
@@ -441,10 +441,10 @@ function rinshoutbox_is_installed()
 {
 	global $db;
 
-	$query = $db->simple_select("settinggroups", "COUNT(*) as rows", "name = 'rinshoutbox'");
-	$rows  = $db->fetch_field($query, 'rows');
+	$query = $db->simple_select("settinggroups", "COUNT(*) as counts", "name = 'rinshoutbox'");
+	$counts = $db->fetch_field($query, 'counts');
 
-	return ($rows > 0);
+	return ($counts > 0);
 }
 
 function rinshoutbox_activate()
