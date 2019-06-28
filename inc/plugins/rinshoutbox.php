@@ -962,7 +962,7 @@ function token_gen() {
 			"edt" => $rsbedg,
 			"avatar" => $avatar,
 			"lc" => (int)$mybb->settings['rinshoutbox_lim_character'],
-			"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1000
+			"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1
 		)
 	);
 
@@ -1110,7 +1110,7 @@ function rinshoutbox_auth()
 				"mod" => $rsbmod,
 				"avatar" => $avatar,
 				"lc" => (int)$mybb->settings['rinshoutbox_lim_character'],
-				"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1000,
+				"floodtime" => $mybb->settings['rinshoutbox_antiflood']*1,
 				"mpp" => $mybb->settings['rinshoutbox_lognum_shouts'],
 				"numshouts" => $mybb->settings['rinshoutbox_num_shouts'],
 				"apikey" => trim($mybb->settings['rinshoutbox_apiKey']),
