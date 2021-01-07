@@ -20,7 +20,7 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-define('RSB_PLUGIN_VER', '0.4.1');
+define('RSB_PLUGIN_VER', '0.4.2');
 
 function rinshoutbox_info()
 {
