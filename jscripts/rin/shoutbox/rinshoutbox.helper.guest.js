@@ -93,7 +93,7 @@ function scrollrin(key,area,ckold,imarea) {
 		$("div."+imgarea+" img").one("load", function() {
 			$(""+area+"").animate({scrollTop: ($(""+area+"")[0].scrollHeight)}, 10);
 		}).each(function() {
-			if(this.complete) $(this).load();
+			if(this.complete) $(this).load(this.src);
 		});
 	}
 }
